@@ -3,25 +3,119 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <title>Beautiful Quotes</title>
+    <title>Time Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input, select, button {
+            margin-bottom: 16px;
+            padding: 8px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #timetable {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #timetable li {
+            margin-bottom: 8px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Beautiful Quotes</h1>
-        <div id="quote-container"></div>
-        <label for="usernameInput">Your Username:</label>
-        <input type="text" id="usernameInput" placeholder="Enter your username...">
-        <label for="quoteInput">Your Quote:</label>
-        <textarea id="quoteInput" placeholder="Share your quote..."></textarea>
-        <button onclick="postQuote()">Post Quote</button>
+        <h1>Time Table</h1>
+
+        <label for="hours">Select Hours:</label>
+        <input type="number" id="hours" min="1" max="12" required>
+
+        <label for="minutes">Select Minutes:</label>
+        <input type="number" id="minutes" min="0" max="59" required>
+
+        <label for="amPmSelect">Select AM/PM:</label>
+        <select id="amPmSelect" required>
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+        </select>
+
+        <button onclick="generateTimeTable()">Generate Time Table</button>
+
+        <ol id="timetable"></ol>
     </div>
 
-    <div class="copyright">
-        <p>&copy; 2024 Beautiful Quotes. All rights reserved.</p>
-    </div>
+    <script>
+        function generateTimeTable() {
+            const hours = parseInt(document.getElementById("hours").value);
+            const minutes = parseInt(document.getElementById("minutes").value);
+            const amPmSelect = document.getElementById("amPmSelect").value;
+            const timetable = document.getElementById("timetable");
 
-    <script src="scripts.js"></script>
+            timetable.innerHTML = ""; // Clear previous timetable content
+
+            const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+            for (const day of days) {
+                const listItem = document.createElement("li");
+                let daySchedule = "Indoor Class";
+                let location = "";
+
+                if (day === "Thursday") {
+                    daySchedule = "Outdoor Class";
+                    location = "Gandhi Maidan";
+                    const fixedStartTime = "08:00 am";
+                    const fixedEndTime = "10:00 am";
+                    listItem.textContent = `${day}: ${daySchedule} (${fixedStartTime} - ${fixedEndTime}) at ${location}`;
+                } else if (day === "Saturday") {
+                    daySchedule = "Outdoor Class";
+                    location = "SK Puri Park";
+                    const fixedStartTime = "03:00 pm";
+                    const fixedEndTime = "05:00 pm";
+                    listItem.textContent = `${day}: ${daySchedule} (${fixedStartTime} - ${fixedEndTime}) at ${location}`;
+                } else {
+                    const formattedStartTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")} ${amPmSelect}`;
+                    const formattedEndTime = `${(hours + 2).toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")} ${amPmSelect}`;
+                    listItem.textContent = `${day}: ${daySchedule} (${formattedStartTime} - ${formattedEndTime})`;
+                }
+
+                timetable.appendChild(listItem);
+            }
+        }
+    </script>
 </body>
 </html>
