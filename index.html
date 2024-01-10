@@ -64,6 +64,17 @@
             text-align: left;
         }
 
+        /* Added style for the highlighted text */
+        .highlight-outdoor {
+            background-color: yellow;
+            font-weight: bold;
+        }
+
+        .highlight-location {
+            background-color: green;
+            font-weight: bold;
+        }
+
         /* Added style for the copyright statement */
         #copyright {
             background-color: black;
@@ -120,13 +131,13 @@
                     location = "Gandhi Maidan";
                     const fixedStartTime = "08:00 am";
                     const fixedEndTime = "10:00 am";
-                    listItem.textContent = `${day}: ${daySchedule} (${fixedStartTime} - ${fixedEndTime}) at ${location}`;
+                    listItem.innerHTML = `${day}: <span class="highlight-outdoor">${daySchedule}</span> (${fixedStartTime} - ${fixedEndTime}) at ${location}`;
                 } else if (day === "Saturday") {
                     daySchedule = "Outdoor Class";
                     location = "SK Puri Park";
                     const fixedStartTime = "03:00 pm";
                     const fixedEndTime = "05:00 pm";
-                    listItem.textContent = `${day}: ${daySchedule} (${fixedStartTime} - ${fixedEndTime}) at ${location}`;
+                    listItem.innerHTML = `${day}: <span class="highlight-outdoor">${daySchedule}</span> (${fixedStartTime} - ${fixedEndTime}) at <span class="highlight-location">${location}</span>`;
                 } else {
                     const formattedStartTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")} ${amPmSelect}`;
                     const formattedEndTime = `${(hours + 2).toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")} ${amPmSelect}`;
