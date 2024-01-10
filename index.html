@@ -56,6 +56,16 @@
             margin-bottom: 8px;
             text-align: left;
         }
+
+        /* Added style for the copyright statement */
+        #copyright {
+            background-color: darkorange;
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -77,6 +87,9 @@
         <button onclick="generateTimeTable()">Generate Time Table</button>
 
         <ol id="timetable"></ol>
+
+        <!-- Added an ID for styling the copyright statement -->
+        <p id="copyright">&copy; 2024 Rebel Spoken English. All rights reserved.</p>
     </div>
 
     <script>
