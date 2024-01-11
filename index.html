@@ -71,7 +71,7 @@
         }
 
         .highlight-location {
-            background-color: green;
+            background-color: Lime;
             font-weight: bold;
         }
 
@@ -91,10 +91,10 @@
         <h1>Time Table</h1>
 
         <label for="hours">Select Hours:</label>
-        <input type="number" id="hours" min="1" max="12" required>
+        <input type="number" id="hours" min="1" max="12" placeholder="Enter hours (1-12)" required>
 
         <label for="minutes">Select Minutes:</label>
-        <input type="number" id="minutes" min="0" max="59" required>
+        <input type="number" id="minutes" min="0" max="59" placeholder="Enter minutes (0-59)" required>
 
         <label for="amPmSelect">Select AM/PM:</label>
         <select id="amPmSelect" required>
@@ -107,13 +107,32 @@
         <ol id="timetable"></ol>
 
         <!-- Added an ID for styling the copyright statement -->
-        <p id="copyright">&copy; 2024 Rebel Spoken English.</p>
+        <p id="copyright">&copy; 2024 Rebel Spoken English</p>
     </div>
 
     <script>
         function generateTimeTable() {
-            const hours = parseInt(document.getElementById("hours").value);
-            const minutes = parseInt(document.getElementById("minutes").value);
+            const hoursInput = document.getElementById("hours");
+            const minutesInput = document.getElementById("minutes");
+
+            // Get the input values
+            let hours = parseInt(hoursInput.value);
+            let minutes = parseInt(minutesInput.value);
+
+            // Validate and limit hours between 1 and 12
+            if (hours < 1 || hours > 12 || isNaN(hours)) {
+                alert("Please enter valid hours between 01 and 12.");
+                hoursInput.value = "";
+                return;
+            }
+
+            // Validate and limit minutes between 0 and 59
+            if (minutes < 0 || minutes > 59 || isNaN(minutes)) {
+                alert("Please enter valid minutes between 00 and 59.");
+                minutesInput.value = "";
+                return;
+            }
+
             const amPmSelect = document.getElementById("amPmSelect").value;
             const timetable = document.getElementById("timetable");
 
@@ -126,12 +145,14 @@
                 let daySchedule = "Indoor Class";
                 let location = "";
 
-                if (day === "Thursday") {
+               if (day === "Thursday") {
                     daySchedule = "Outdoor Class";
                     location = "Gandhi Maidan";
                     const fixedStartTime = "08:00 am";
                     const fixedEndTime = "10:00 am";
-                    listItem.innerHTML = `${day}: <span class="highlight-outdoor">${daySchedule}</span> (${fixedStartTime} - ${fixedEndTime}) at ${location}`;
+                    listItem.innerHTML = `${day}: <span class="highlight-outdoor">${daySchedule}</span> (${fixedStartTime} - ${fixedEndTime}) at <span class="highlight-location">${location}</span>`;
+                
+
                 } else if (day === "Saturday") {
                     daySchedule = "Outdoor Class";
                     location = "SK Puri Park";
