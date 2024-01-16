@@ -5,97 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Time Table</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-        }
+   <link rel="stylesheet" href="styles.css">
 
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            width: 90%;
-            max-width: 400px;
-            box-sizing: border-box;
-        }
-
-        h1 {
-            background-color: darkorange;
-            color: white;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-size: 0.9rem;
-        }
-
-        input,
-        select,
-        button {
-            width: calc(100% - 16px);
-            margin-bottom: 12px;
-            padding: 8px;
-            box-sizing: border-box;
-            font-size: 0.9rem;
-        }
-
-        button {
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
-        #timetable li {
-            margin-bottom: 8px;
-            text-align: left;
-            padding: 8px;
-            border-radius: 4px;
-            background-color: #eaeaea;
-            font-size: 0.9rem;
-        }
-
-        .highlight-outdoor {
-            background-color: yellow;
-            font-weight: bold;
-        }
-
-        .highlight-location {
-            background-color: lime;
-            font-weight: bold;
-        }
-
-        #copyright {
-            background-color: black;
-            color: white;
-            padding: 8px;
-            border-radius: 4px;
-            margin-top: 20px;
-            font-style: italic;
-            font-size: 0.8rem;
-        }
-    </style>
 </head>
 
 <body>
@@ -120,65 +31,12 @@
 
         <p id="copyright">&copy; 2024 Rebel Spoken English</p>
     </div>
-
-    <script>
-        function generateTimeTable() {
-            const hoursInput = document.getElementById("hours");
-            const minutesInput = document.getElementById("minutes");
-
-            // Get the input values
-            let hours = parseInt(hoursInput.value);
-            let minutes = parseInt(minutesInput.value);
-
-            // Validate and limit hours between 1 and 12
-            if (hours < 1 || hours > 12 || isNaN(hours)) {
-                alert("Please enter valid hours between 01 and 12.");
-                hoursInput.value = "";
-                return;
-            }
-
-            // Validate and limit minutes between 0 and 59
-            if (minutes < 0 || minutes > 59 || isNaN(minutes)) {
-                alert("Please enter valid minutes between 00 and 59.");
-                minutesInput.value = "";
-                return;
-            }
-
-            const amPmSelect = document.getElementById("amPmSelect").value;
-            const timetable = document.getElementById("timetable");
-
-            timetable.innerHTML = ""; // Clear previous timetable content
-
-            const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-
-            for (const day of days) {
-                const listItem = document.createElement("li");
-                let daySchedule = "Indoor Class";
-                let location = "";
-
-                if (day === "Thursday") {
-                    daySchedule = "Outdoor Class";
-                    location = "Gandhi Maidan";
-                    const fixedStartTime = "08:00 am";
-                    const fixedEndTime = "10:00 am";
-                    listItem.innerHTML = `${day}: <span class="highlight-outdoor">${daySchedule}</span> (${fixedStartTime} - ${fixedEndTime}) at <span class="highlight-location">${location}</span>`;
-
-                } else if (day === "Saturday") {
-                    daySchedule = "Outdoor Class";
-                    location = "SK Puri Park";
-                    const fixedStartTime = "03:00 pm";
-                    const fixedEndTime = "05:00 pm";
-                    listItem.innerHTML = `${day}: <span class="highlight-outdoor">${daySchedule}</span> (${fixedStartTime} - ${fixedEndTime}) at <span class="highlight-location">${location}</span>`;
-                } else {
-                    const formattedStartTime = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")} ${amPmSelect}`;
-                    const formattedEndTime = `${(hours + 2).toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")} ${amPmSelect}`;
-                    listItem.textContent = `${day}: ${daySchedule} (${formattedStartTime} - ${formattedEndTime})`;
-                }
-
-                timetable.appendChild(listItem);
-            }
-        }
-    </script>
+      
+      <script src="myscripts.js"></script>
+   
 </body>
 
 </html>
+
+
+<!-- ----------Created By Atul Singh Rajput ------ -->
